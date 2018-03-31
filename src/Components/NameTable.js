@@ -1,12 +1,22 @@
 import React, {Component} from 'react';
 
+function NameTableRow(props) {
+  return (
+    <tr key={props.i}><td>{props.name}
+      <i className="material-icons small right" onClick={props.handler}>delete</i>
+    </td></tr>
+  )
+}
+
+
 class NameTable extends Component {
 
   constructor() {
     super();
-    this.state = {names: [], userInput: ""};
+    this.state = {names: ["h"], userInput: ""};
     this.addName = this.addName.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
+    this.handleRemoveNameRow = this.handleRemoveNameRow.bind(this);
   }
 
   handleUserInput(event) {
@@ -21,9 +31,13 @@ class NameTable extends Component {
     }
   }
 
+  handleRemoveNameRow(e) {
+    console.log("removed: " + e);
+  }
+
   render() {
-    const tableNames = this.state.names.map(
-      (name, i) => <tr key={i}><td>{name}</td></tr> );
+    const tableNames = this.state.names.map((name, i) =>
+      <NameTableRow key={i+"_"+name} name={name} handler={this.handleUserInput()} /> );
 
     return (
       <div className="container">
