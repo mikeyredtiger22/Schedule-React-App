@@ -14,8 +14,11 @@ class NameTable extends Component {
   }
 
   addName() {
-    const newData = this.state.names.concat([this.state.userInput]);
-    this.setState({names: newData, userInput: ""})
+    const name = this.state.userInput.trim();
+    if (name.length > 0) {
+      const newData = this.state.names.concat([name]);
+      this.setState({names: newData, userInput: ""})
+    }
   }
 
   render() {
@@ -30,10 +33,9 @@ class NameTable extends Component {
                    value={this.state.userInput} onChange={this.handleUserInput}/>
             <label htmlFor="nameInput">Name</label>
           </div>
-          <div className="col s4 m3" style={{marginTop: "20px"}}>
-            <button className="btn waves-effect waves-light" onClick={this.addName}>
-              <i className="material-icons left">add</i>add
-            </button>
+          <div className="col s2 m1" style={{marginTop: "20px"}}>
+            <button className="btn waves-effect waves-light" onClick={this.addName}
+                    disabled={this.state.names.length === 10} >add</button>
           </div>
         </div>
         <div className="row">
