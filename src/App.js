@@ -2,16 +2,22 @@ import React, { Component } from 'react';
 import axios from "axios";
 import logo from './logo.svg';
 import './App.css';
+import NameTable from "./Components/NameTable";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {response: []};
+    this.apiCall = this.apiCall.bind(this);
   }
 
   componentDidMount() {
-    // this.apiCall()
-    axios.get('https://python-flask-api-schedule.herokuapp.com/')
+    this.apiCall()
+
+  }
+
+  apiCall() {
+    axios.get('https://python-flask-api-schedule.herokuapp.com/generate/2')
       .then(
         function (response) {
           console.log("api response data: " + response.data);
@@ -24,10 +30,6 @@ class App extends Component {
       });
   }
 
-  // apiCall() {
-  //
-  // }
-
   render() {
     return (
       <div className="App">
@@ -39,7 +41,8 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <p>{this.state.response}</p>
-        {/*<button onClick={this.apiCall}>Reload</button>*/}
+        <button onClick={this.apiCall}>Reload</button>
+        <NameTable/>
       </div>
     );
   }
