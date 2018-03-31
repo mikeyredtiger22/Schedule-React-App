@@ -19,28 +19,26 @@ class NameTable extends Component {
   }
 
   render() {
-    const tableNames = this.state.names.map((name) =>
-      <tr>
-        <td>{name}</td>
-      </tr>
-    );
+    const tableNames = this.state.names.map(
+      (name, i) => <tr key={i}><td>{name}</td></tr> );
+
     return (
       <div className="container">
         <div className="row">
-          <div className="input-field col s2">
+          <div className="input-field col s4 m3">
             <input id="nameInput" type="text" className="validate"
                    value={this.state.userInput} onChange={this.handleUserInput}/>
             <label htmlFor="nameInput">Name</label>
           </div>
-          <div className="col s2" style={{marginTop: "20px"}}>
+          <div className="col s4 m3" style={{marginTop: "20px"}}>
             <button className="btn waves-effect waves-light" onClick={this.addName}>
               <i className="material-icons left">add</i>add
             </button>
           </div>
         </div>
         <div className="row">
-          <div className="col s4">
-            <table className="bordered highlight">
+          <div className="col s4 m3">
+            <table className="bordered highlight green accent-1 z-depth-3">
               <thead>
               <tr>
                 <th>Workers:</th>
