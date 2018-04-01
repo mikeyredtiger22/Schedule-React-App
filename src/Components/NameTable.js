@@ -46,26 +46,26 @@ class NameTable extends Component {
 
     let workerLimit = "";
     if (this.state.names.length === 10) {
-      workerLimit = <p id="workerLimitText">Reached limit of workers.</p>;
+      workerLimit = <p className="workerLimitText">Reached limit of workers.</p>;
     }
 
     return (
-      <div className="container">
+      <div>
         <div className="row">
           {workerLimit}
-          <div className="input-field col s4 m3">
+          <div className="input-field col s7">
             <input id="nameInput" type="text" className="validate"
                    value={this.state.userInput} onChange={this.handleUserInput}/>
             <label htmlFor="nameInput">Name</label>
           </div>
-          <div className="col s2 m1" style={{marginTop: "20px"}}>
-            <button className="btn waves-effect waves-light" onClick={this.addName}
-                    disabled={this.state.names.length === 10}>add
+          <div className="col s5 m5 l5" style={{marginTop: "20px"}}>
+            <button className="addNameButton btn waves-effect waves-light"
+                    onClick={this.addName} disabled={this.state.names.length === 10}>add
             </button>
           </div>
         </div>
         <div className="row">
-          <div className="col s4 m3">
+          <div className="col s12">
             <table className="bordered highlight green accent-1 z-depth-3">
               <thead>
               <tr>
