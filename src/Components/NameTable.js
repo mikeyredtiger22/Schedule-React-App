@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 function NameTableRow(props) {
   return (
-    <tr key={props.i}><td>{props.name}
+    <tr><td>{props.name}
       <i className="material-icons small right" onClick={props.handler}>delete</i>
     </td></tr>
   )
@@ -13,10 +13,11 @@ class NameTable extends Component {
 
   constructor() {
     super();
-    this.state = {names: ["h"], userInput: ""};
+    this.state = {names: [], userInput: ""};
     this.addName = this.addName.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleRemoveNameRow = this.handleRemoveNameRow.bind(this);
+    this.testButton = this.testButton.bind(this);
   }
 
   handleUserInput(event) {
@@ -33,15 +34,25 @@ class NameTable extends Component {
 
   handleRemoveNameRow(e) {
     console.log("removed: " + e);
+    const array = this.state.names;
+    array.splice(array.length-1, 1);
+    this.setState({names: array});
+  }
+
+  testButton() {
+    const array = this.state.names; //todo slice?
+    array.splice(array.length-1, 1);
+    this.setState({names: array});
   }
 
   render() {
     const tableNames = this.state.names.map((name, i) =>
-      <NameTableRow key={i+"_"+name} name={name} handler={this.handleUserInput()} /> );
+      <NameTableRow key={i+"_"+name} name={name} handler={this.handleRemoveNameRow} /> );
 
     return (
       <div className="container">
         <div className="row">
+          <button onClick={this.testButton}>Remove</button>
           <div className="input-field col s4 m3">
             <input id="nameInput" type="text" className="validate"
                    value={this.state.userInput} onChange={this.handleUserInput}/>
