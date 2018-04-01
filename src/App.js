@@ -7,7 +7,7 @@ import ScheduleTable from "./Components/ScheduleTable"
 class App extends Component {
   constructor() {
     super();
-    this.state = {response: []};
+    this.state = {response: null};
     this.apiCall = this.apiCall.bind(this);
   }
 
@@ -20,7 +20,7 @@ class App extends Component {
       .then(
         function (response) {
           console.log("api response data: " + response.data);
-          return JSON.stringify(response.data);
+          return response.data;
         }
       )
       .then(response => this.setState({response: response}))
@@ -30,6 +30,8 @@ class App extends Component {
   }
 
   render() {
+    let scheduleTable = (this.state.response) ?
+      <ScheduleTable data={this.state.response}/> : null;
     return (
       <div className="appContainer">
         <div className="row">
@@ -41,7 +43,7 @@ class App extends Component {
             <button onClick={this.apiCall}>Reload</button>
           </div>
           <div className="col s12 m6 l8">
-            <ScheduleTable data={this.state.response}/>
+            {scheduleTable}
           </div>
         </div>
       </div>

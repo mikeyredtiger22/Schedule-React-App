@@ -2,20 +2,16 @@ import React, {Component} from 'react';
 
 class ScheduleTable extends Component {
 
-  constructor(props) {
-    super(props);
-
-  }
-
   render() {
     let names = [];
+    let data = this.props.data[0];
     for (let i=0; i<10; i++) {
-      names[i] = "worker " + (i+1);
+      names[i] = "worker " + data[i];
     }
 
     const tableNames = [];
     for (let i=0; i<10; i++) {
-      tableNames.push(<td>{names[i]}</td>);
+      tableNames.push(<td key={i+"_"+names[i]}>{names[i]}</td>);
     }
 
     const row1 =
@@ -33,7 +29,7 @@ class ScheduleTable extends Component {
       <table className="bordered responsive-table">
         <thead>
         <tr>
-          <th>.{this.props.data}</th>
+          <th>Week 1</th>
           <th>Mon</th>
           <th>Tue</th>
           <th>Wed</th>
