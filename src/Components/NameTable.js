@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 
 function NameTableRow(props) {
   return (
-    <tr><td>{props.name}
-      <i className="material-icons small right" onClick={props.handler}>delete</i>
-    </td></tr>
+    <tr>
+      <td>{props.name}
+        <i className="material-icons small right" onClick={props.handler}>delete</i>
+      </td>
+    </tr>
   )
 }
 
@@ -17,7 +19,6 @@ class NameTable extends Component {
     this.addName = this.addName.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleRemoveNameRow = this.handleRemoveNameRow.bind(this);
-    this.testButton = this.testButton.bind(this);
   }
 
   handleUserInput(event) {
@@ -32,27 +33,26 @@ class NameTable extends Component {
     }
   }
 
-  handleRemoveNameRow(e) {
-    console.log("removed: " + e);
+  handleRemoveNameRow(index) {
     const array = this.state.names;
-    array.splice(array.length-1, 1);
-    this.setState({names: array});
-  }
-
-  testButton() {
-    const array = this.state.names; //todo slice?
-    array.splice(array.length-1, 1);
+    array.splice(index, 1);
     this.setState({names: array});
   }
 
   render() {
-    const tableNames = this.state.names.map((name, i) =>
-      <NameTableRow key={i+"_"+name} name={name} handler={this.handleRemoveNameRow} /> );
+    const tableNames = this.state.names.map((name, index) =>
+      <NameTableRow key={index + "_" + name} name={name}
+                    handler={() => this.handleRemoveNameRow(index)}/>);
+
+    let workerLimit = "";
+    if (this.state.names.length === 10) {
+      workerLimit = <p id="workerLimitText">Reached limit of workers.</p>;
+    }
 
     return (
       <div className="container">
         <div className="row">
-          <button onClick={this.testButton}>Remove</button>
+          {workerLimit}
           <div className="input-field col s4 m3">
             <input id="nameInput" type="text" className="validate"
                    value={this.state.userInput} onChange={this.handleUserInput}/>
@@ -60,7 +60,8 @@ class NameTable extends Component {
           </div>
           <div className="col s2 m1" style={{marginTop: "20px"}}>
             <button className="btn waves-effect waves-light" onClick={this.addName}
-                    disabled={this.state.names.length === 10} >add</button>
+                    disabled={this.state.names.length === 10}>add
+            </button>
           </div>
         </div>
         <div className="row">
