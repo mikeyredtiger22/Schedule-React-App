@@ -4,7 +4,7 @@ function NameTableRow(props) {
   return (
     <tr>
       <td>{props.name}
-        <i className="material-icons small right" onClick={props.handler}>delete</i>
+        <i className="material-icons small right" onClick={props.handleRemoveName}>delete</i>
       </td>
     </tr>
   )
@@ -15,37 +15,29 @@ class NameTable extends Component {
 
   constructor() {
     super();
-    this.state = {names: [], userInput: ""};
-    this.addName = this.addName.bind(this);
+    this.state = {userInput: ""};
     this.handleUserInput = this.handleUserInput.bind(this);
-    this.handleRemoveNameRow = this.handleRemoveNameRow.bind(this);
+    this.handleNewName = this.handleNewName.bind(this);
   }
 
   handleUserInput(event) {
     this.setState({userInput: event.target.value});
   }
 
-  addName() {
-    const name = this.state.userInput.trim();
-    if (name.length > 0) {
-      const newData = this.state.names.concat([name]);
-      this.setState({names: newData, userInput: ""})
-    }
-  }
-
-  handleRemoveNameRow(index) {
-    const array = this.state.names;
-    array.splice(index, 1);
-    this.setState({names: array});
+  handleNewName() {
+    this.props.handleNewName(this.state.userInput);
+    this.setState({userInput: ""});
   }
 
   render() {
-    const tableNames = this.state.names.map((name, index) =>
+    console.log("names: " + this.props.names.length);
+    const tableNames = [];
+    this.props.names.forEach((name, index) => tableNames.push(
       <NameTableRow key={index + "_" + name} name={name}
-                    handler={() => this.handleRemoveNameRow(index)}/>);
+                    handleRemoveName={() => this.props.handleRemoveName(index)}/>));
 
     let workerLimit = "";
-    if (this.state.names.length === 10) {
+    if (this.props.names.length === 10) {
       workerLimit = <p className="workerLimitText">Reached limit of workers.</p>;
     }
 
@@ -55,12 +47,14 @@ class NameTable extends Component {
           {workerLimit}
           <div className="input-field col s7">
             <input id="nameInput" type="text" className="validate"
-                   value={this.state.userInput} onChange={this.handleUserInput}/>
+                   value={this.state.userInput}
+                   onChange={this.handleUserInput}/>
             <label htmlFor="nameInput">Name</label>
           </div>
           <div className="col s5 m5 l5" style={{marginTop: "20px"}}>
             <button className="addNameButton btn waves-effect waves-light"
-                    onClick={this.addName} disabled={this.state.names.length === 10}>add
+                    onClick={this.handleNewName}
+                    disabled={this.props.names.length === 10}>add
             </button>
           </div>
         </div>
