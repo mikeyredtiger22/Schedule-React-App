@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import './App.css';
 import NameTable from "./Components/NameTable";
+import ScheduleTable from "./Components/ScheduleTable"
 
 class App extends Component {
   constructor() {
@@ -38,6 +39,9 @@ class App extends Component {
           <div className="col s12 m6 l8">
             <p>{this.state.response}</p>
             <button onClick={this.apiCall}>Reload</button>
+          </div>
+          <div className="col s12 m6 l8">
+            <ScheduleTable data={this.state.response}/>
           </div>
         </div>
       </div>
