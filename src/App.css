@@ -12,9 +12,23 @@ table.bordered>thead>tr, table.bordered>tbody>tr {
 }
 
 .addNameButton {
-    width: 100%;
+  width: 100%;
 }
 
 .appContainer {
-    margin: 20px;
+  margin: 20px;
+}
+
+table {
+  table-layout: fixed;
+}
+
+td {
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 992px) {
+  table.responsive-table th {
+    text-align: left;
+  }
 }

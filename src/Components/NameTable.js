@@ -30,7 +30,6 @@ class NameTable extends Component {
   }
 
   render() {
-    console.log("names: " + this.props.names.length);
     const tableNames = [];
     this.props.names.forEach((name, index) => tableNames.push(
       <NameTableRow key={index + "_" + name} name={name}
