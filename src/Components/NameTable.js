@@ -43,6 +43,7 @@ class NameTable extends Component {
     return (
       <div>
         <div className="row">
+          <h4>Add Names:</h4>
           {workerLimit}
           <div className="input-field col s7">
             <input id="nameInput" type="text" className="validate"

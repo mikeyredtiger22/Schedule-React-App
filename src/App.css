@@ -1,9 +1,23 @@
-table.bordered>tbody>tr {
+table.bordered>thead>tr, table.bordered>tbody>tr {
   border-bottom: 1px solid rgb(102, 203, 129);
 }
 
-table.bordered>thead>tr, table.bordered>tbody>tr {
-  border-bottom: 1px solid rgb(102, 203, 129);
+@media only screen and (max-width: 992px) {
+  table.responsive-table th {
+    text-align: left;
+  }
+  table.responsive-table thead {
+    border-right: 1px solid rgb(102, 203, 129);
+  }
+  table.responsive-table.bordered tbody tr {
+    border-right: 1px solid rgb(102, 203, 129);
+  }
+  table.schedule thead {
+    width: 33%
+  }
+  table.schedule tbody>tr {
+    width: 50%
+  }
 }
 
 .workerLimitText {
@@ -23,12 +37,25 @@ table {
   table-layout: fixed;
 }
 
-td {
-  overflow: hidden;
+.scheduleContainer {
+  float: right !important;
 }
 
-@media only screen and (max-width: 992px) {
-  table.responsive-table th {
-    text-align: left;
+.rotate {
+  animation: rotate-keyframes 2s;
+}
+
+@keyframes rotate-keyframes {
+  from {
+    transform: rotate(0deg);
   }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+img {
+  max-width: 100%;
+  max-height: 150px;
 }

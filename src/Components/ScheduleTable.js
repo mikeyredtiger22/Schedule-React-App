@@ -33,7 +33,7 @@ class ScheduleTable extends Component {
         {tableNames.slice(5)}
       </tr>;
     return (
-      <table className="bordered responsive-table">
+      <table className="schedule bordered responsive-table green accent-1 z-depth-3">
         <thead>
         <tr>
           <th>Week 1</th>

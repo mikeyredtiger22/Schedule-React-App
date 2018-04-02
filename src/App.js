@@ -3,12 +3,14 @@ import axios from "axios";
 import './App.css';
 import NameTable from "./Components/NameTable";
 import ScheduleTable from "./Components/ScheduleTable"
+import Wheel from "./Components/Wheel";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {response: null, names: []};
     this.apiCall = this.apiCall.bind(this);
+    this.handleReload = this.handleReload.bind(this);
     this.handleNewName = this.handleNewName.bind(this);
     this.handleRemoveName = this.handleRemoveName.bind(this);
   }
@@ -27,8 +29,12 @@ class App extends Component {
       )
       .then(response => this.setState({response: response}))
       .catch(function (error) {
-        console.log("error: " + error);
+        console.log("api call error: " + error);
       });
+  }
+
+  handleReload() {
+    this.apiCall()
   }
 
   handleNewName(name) {
@@ -54,9 +60,9 @@ class App extends Component {
                        handleRemoveName={this.handleRemoveName}/>
           </div>
           <div className="col s12 m6 l8">
-            <button onClick={this.apiCall}>Reload</button>
+            <Wheel handleReload={this.handleReload}/>
           </div>
-          <div className="col s12 m6 l8">
+          <div className="col s12 m6 l8 scheduleContainer">
             {scheduleTable}
           </div>
         </div>
