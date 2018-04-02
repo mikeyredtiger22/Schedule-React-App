@@ -41,6 +41,11 @@ table {
   float: right !important;
 }
 
+.schedule {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .rotate {
   animation: rotate-keyframes 2s;
 }

@@ -49,8 +49,13 @@ class App extends Component {
   }
 
   render() {
-    let scheduleTable = (!this.state.response) ? null :
-      <ScheduleTable data={this.state.response} names={this.state.names}/>;
+    let scheduleTable1, scheduleTable2 = "";
+    if (this.state.response) {
+      scheduleTable1 = <ScheduleTable data={this.state.response[0]}
+                                      names={this.state.names} week={1}/>;
+      scheduleTable2 = <ScheduleTable data={this.state.response[1]}
+                                      names={this.state.names} week={2}/>;
+    }
     return (
       <div className="appContainer">
         <div className="row">
@@ -63,7 +68,10 @@ class App extends Component {
             <Wheel handleReload={this.handleReload}/>
           </div>
           <div className="col s12 m6 l8 scheduleContainer">
-            {scheduleTable}
+            {scheduleTable1}
+          </div>
+          <div className="col s12 m6 l8 scheduleContainer">
+            {scheduleTable2}
           </div>
         </div>
       </div>

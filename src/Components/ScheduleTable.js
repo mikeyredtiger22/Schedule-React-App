@@ -5,7 +5,7 @@ class ScheduleTable extends Component {
   render() {
     let names = [];
     let namesGivenLength = this.props.names.length;
-    let data = this.props.data[0];
+    let data = this.props.data;
 
     for (let i=0; i<namesGivenLength; i++) {
       names[i] = this.props.names[i];
@@ -36,7 +36,7 @@ class ScheduleTable extends Component {
       <table className="schedule bordered responsive-table green accent-1 z-depth-3">
         <thead>
         <tr>
-          <th>Week 1</th>
+          <th>Week {this.props.week}</th>
           <th>Mon</th>
           <th>Tue</th>
           <th>Wed</th>
