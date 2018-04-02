@@ -1,0 +1,39 @@
+Tests:
+
+    All:
+        Props are handled by PropTypes
+        Use Jest Snapshots for each Component (overwrite when changing UI)
+        Using Enzyme to allow extra testing functionality
+
+    App:
+        Doesn't render ScheduleTables before apiCall response is received
+        Renders ScheduleTables if apiCall response has been received
+        Always renders NameTable and Wheel
+
+    NameTable:
+        NameTableRow count matches props.names length
+        Every name in props.names is present in a NameTableRow
+        Table, input and button are always rendered
+        Button click event calls props.handleNewName when nameInput is non-empty
+        Button click event doesn't call props.handleNewName when nameInput is empty
+        Click event on delete icon calls props.handleRemoveName
+        Worker limit message displayed when NameTableRow count (or props.names) == 10
+        Worker limit message not displayed when NameTableRow count (or props.names) != 10
+
+    ScheduleTable:
+        One "Week 1" table and one "Week 2" table (check first <th>)
+        In each table:
+            All props.names are contained in the table
+            All cells in table are non-empty
+            Table contains 8 <th> and 10 <td> elements
+            props.names are positioned in table according to props.data
+
+    Wheel:
+        Renders Image
+        If state.rotating == true then image className == "rotating"
+        If state.rotating == false then image has no className
+        Image click event changes state.rotating to true if state.rotating = false
+        Image click event doesn't change state.rotating if state.rotating = true
+        Image click event calls props.handleReload if state.rotating = true
+        Image click event doesn't call props.handleReload if state.rotating = false
+        2 seconds after Wheel.handleReload, state.rotating == false
