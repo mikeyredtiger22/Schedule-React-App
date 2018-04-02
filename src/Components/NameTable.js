@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 function NameTableRow(props) {
   return (
@@ -77,5 +78,11 @@ class NameTable extends Component {
     )
   }
 }
+
+NameTable.propTypes = {
+  names: PropTypes.array.isRequired,
+  handleNewName: PropTypes.func.isRequired,
+  handleRemoveName: PropTypes.func.isRequired
+};
 
 export default NameTable;

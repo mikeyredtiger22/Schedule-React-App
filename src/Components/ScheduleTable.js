@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class ScheduleTable extends Component {
 
   render() {
     let names = [];
-    let namesGivenLength = this.props.names.length;
+    let namesGivenLength = 0;
+    if (this.props.names) {
+      namesGivenLength = this.props.names.length;
+    }
     let data = this.props.data;
 
     for (let i=0; i<namesGivenLength; i++) {
@@ -52,5 +56,14 @@ class ScheduleTable extends Component {
     )
   }
 }
+
+ScheduleTable.propTypes = {
+  data: PropTypes.array.isRequired,
+  names : PropTypes.array,
+  week: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ])
+};
 
 export default ScheduleTable;

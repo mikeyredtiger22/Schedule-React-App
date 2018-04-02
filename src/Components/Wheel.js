@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import reload_icon from "./reload_icon.png";
+import PropTypes from 'prop-types';
 
 class Wheel extends Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class Wheel extends Component {
   handleReload() {
     if (!this.state.rotating) {
       this.setState({rotating: true});
-      this.props.handleReload();
+      if (this.props.handleReload) {
+        this.props.handleReload();
+      }
       setTimeout(() => this.setState({rotating: false}), 2000);
     }
   }
@@ -32,5 +35,9 @@ class Wheel extends Component {
     );
   }
 }
+
+Wheel.propTypes = {
+  handleReload: PropTypes.func
+};
 
 export default Wheel;
