@@ -26,8 +26,11 @@ class NameTable extends Component {
   }
 
   handleNewName() {
-    this.props.handleNewName(this.state.userInput);
-    this.setState({userInput: ""});
+    const newName = this.state.userInput.trim();
+    if (newName.length > 0) {
+      this.props.handleNewName(newName);
+      this.setState({userInput: ""});
+    }
   }
 
   render() {
